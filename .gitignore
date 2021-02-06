@@ -41,6 +41,7 @@ _testmain.go
 node_modules/
 bower_components/
 .tmp
+.tmp/
 .sass-cache
 builds/**/images/*
 *.ogg
