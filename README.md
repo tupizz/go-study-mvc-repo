@@ -41,3 +41,23 @@ log_color_watcher: magenta
 log_color_app:     bold_white
 ```
 
+## Installing a router for our api/application
+
+Here with the `-u` flag, we're telling for gomod to get the last updated version of the library
+
+```bash
+go get -u github.com/gorilla/mux
+```
+
+After this, we must import it to our `main.go`
+
+```go
+import (
+	"fmt"
+	"net/http"
+
+	"github.com/gorilla/mux" // here 😍
+)
+```
+
+
