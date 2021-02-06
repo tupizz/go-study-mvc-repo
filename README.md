@@ -59,5 +59,8 @@ import (
 	"github.com/gorilla/mux" // here 😍
 )
 ```
+## How to run our playground files? easy peace
 
-
+```bash
+go run playground/main.go
+```
