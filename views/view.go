@@ -2,6 +2,7 @@ package views
 
 import (
 	"html/template"
+	"net/http"
 	"path/filepath"
 )
 
@@ -33,6 +34,11 @@ func NewView(layout string, files ...string) *View {
 type View struct {
 	Template *template.Template
 	Layout   string
+}
+
+// Render (v *View) works like the 'this' from O.O. languages
+func (v *View) Render(w http.ResponseWriter, data interface{}) error {
+	return v.Template.ExecuteTemplate(w, v.Layout, data)
 }
 
 // return a slice of string representing the layout files used in our application
