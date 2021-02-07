@@ -4,6 +4,8 @@ import (
 	"html/template"
 	"net/http"
 	"path/filepath"
+
+	"sparkbox.com.br/utils"
 )
 
 // Configuring the listeting for the layouts
@@ -36,8 +38,14 @@ type View struct {
 	Layout   string
 }
 
+// Here we are implemeting a interface just by creating a method with the same name
+func (v *View) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	utils.Must(v.Render(w, nil))
+}
+
 // Render (v *View) works like the 'this' from O.O. languages
 func (v *View) Render(w http.ResponseWriter, data interface{}) error {
+	w.Header().Set("Content-Type", "text/html")
 	return v.Template.ExecuteTemplate(w, v.Layout, data)
 }
 

@@ -12,7 +12,7 @@ import (
 // CreateUserController - factory for our class
 func CreateUserController() *UserController {
 	return &UserController{
-		SignUp: views.NewView("bootstrap", "views/sign-up.gohtml"),
+		SignUp: views.NewView("bootstrap", "views/users/sign-up.gohtml"),
 	}
 }
 
@@ -21,13 +21,13 @@ type UserController struct {
 	SignUp *views.View
 }
 
-// SignUpPage - GET /sign-up
-func (u *UserController) SignUpPage(w http.ResponseWriter, r *http.Request) {
+// SignUpView - GET /sign-up
+func (u *UserController) SignUpView(w http.ResponseWriter, r *http.Request) {
 	utils.Must(u.SignUp.Render(w, nil))
 }
 
-// CreateUser - POST /sign-up
-func (u *UserController) CreateUser(w http.ResponseWriter, r *http.Request) {
+// CreateView - POST /sign-up
+func (u *UserController) CreateView(w http.ResponseWriter, r *http.Request) {
 	var form formdata.SignupForm
 
 	// Passing the reference for the form because it will be update in the context
