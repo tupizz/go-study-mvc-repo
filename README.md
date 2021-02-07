@@ -41,6 +41,13 @@ log_color_watcher: magenta
 log_color_app:     bold_white
 ```
 
+## Add hot reload watching your changes with Air
+
+- https://github.com/cosmtrek/air
+- https://techinscribed.com/5-ways-to-live-reloading-go-applications/
+- Create the `.air.toml`
+- Run `air` on the command line inside the folder
+
 ## Installing a router for our api/application
 
 Here with the `-u` flag, we're telling for gomod to get the last updated version of the library
