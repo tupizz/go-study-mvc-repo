@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/gorilla/schema"
+	"sparkbox.com.br/controllers/formdata"
 	"sparkbox.com.br/utils"
 	"sparkbox.com.br/views"
 )
@@ -27,5 +29,17 @@ func (u *UserController) SignUpPage(w http.ResponseWriter, r *http.Request) {
 
 // CreateUser - POST /sign-up
 func (u *UserController) CreateUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("Recebi corretamente")
+	utils.Must(r.ParseForm())
+
+	// ways for getting post values
+	fmt.Println(r.PostForm["email"])
+	fmt.Println(r.PostFormValue("password"))
+
+	dec := schema.NewDecoder()
+	form := formdata.SignupForm{}
+
+	// Cause we're passing the pointer to form we'll update this variable
+	utils.Must(dec.Decode(&form, r.PostForm))
+
+	fmt.Fprintln(w, form)
 }

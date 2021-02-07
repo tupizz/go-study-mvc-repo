@@ -71,3 +71,44 @@ import (
 ```bash
 go run playground/main.go
 ```
+
+## Working with Gorilla Schema
+
+```bash
+go get -u github.com/gorilla/schema
+```
+
+```go
+values := map[string]string{
+	"name": {"John"}, // a string to a slice
+	"Phone": {"999-999-999"} // a string to a slice
+}
+```
+
+It will be mapped for a structure like:
+
+```go
+type Person struct {
+	Name 		string
+	Phone 	string
+}
+```
+
+Also we'll use struct tags
+
+```
+Struct tags are a form of metadata that can be added to to the fields of any struct that you create. When coding them in they will be in the format ‘key:"value"‘, and are found directly after the field’s type (see Listing 7.23 for an example).
+
+Later, when your program is running, other packages can use the reflect package to look up each struct tag and then use that data to determine how it should proceed. For example, the encoding/json package uses this data to determine what key you want used for each field when converting a struct into JSON.
+
+While it isn’t a requirement, most packages will use their package name as the key for all of their struct tags. This makes it easier to determine what package each struct tag is used for when reading your source code.
+
+In Listing 7.23 each struct tag starts with the key schema which denotes that it is used by a package named schema. Similarly, all struct tags for the encoding/json package use the key json.
+```
+
+```go
+type SignupForm struct {
+  Email    string `schema:"email"`
+  Password string `schema:"password"`
+}
+```
