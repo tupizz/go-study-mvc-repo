@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"sparkbox.com.br/controllers"
 	"sparkbox.com.br/utils"
 	"sparkbox.com.br/views"
 )
@@ -39,12 +40,20 @@ func signUp(w http.ResponseWriter, r *http.Request) {
 func main() {
 	homeView = views.NewView("bootstrap", "views/home.gohtml")
 	contactView = views.NewView("bootstrap", "views/contact.gohtml")
-	signUpView = views.NewView("bootstrap", "views/sign-up.gohtml")
+	cUsers := controllers.CreateUserController()
 
 	r := mux.NewRouter()
 	r.NotFoundHandler = http.HandlerFunc(notFound)
-	r.HandleFunc("/", home)
-	r.HandleFunc("/contact", contact)
-	r.HandleFunc("/sign-up", signUp)
+
+	// Home
+	r.HandleFunc("/", home).Methods("GET")
+
+	// Contact
+	r.HandleFunc("/contact", contact).Methods("GET")
+
+	// Users
+	r.HandleFunc("/sign-up", cUsers.SignUpPage).Methods("GET")
+	r.HandleFunc("/sign-up", cUsers.CreateUser).Methods("POST")
+
 	http.ListenAndServe(":3000", r)
 }
